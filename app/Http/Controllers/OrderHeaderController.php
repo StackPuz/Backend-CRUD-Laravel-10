@@ -70,7 +70,7 @@ class OrderHeaderController extends Controller {
         $orderHeaderOrderDetails = DB::table('OrderHeader')
             ->join('OrderDetail', 'OrderHeader.id', 'OrderDetail.order_id')
             ->join('Product', 'OrderDetail.product_id', 'Product.id')
-            ->select('OrderDetail.no', 'Product.name as product_name', 'OrderDetail.qty', 'OrderDetail.order_id')
+            ->select('OrderDetail.no', 'Product.name as product_name', 'OrderDetail.qty')
             ->where('OrderHeader.id', $id)
             ->get();
         return view('orderHeaders.show', ['orderHeader' => $orderHeader, 'ref' => Util::getRef('/orderHeaders'), 'orderHeaderOrderDetails' => $orderHeaderOrderDetails]);
@@ -82,10 +82,16 @@ class OrderHeaderController extends Controller {
             ->select('OrderHeader.id', 'OrderHeader.customer_id', 'OrderHeader.order_date')
             ->where('OrderHeader.id', $id)
             ->first();
+        $orderHeaderOrderDetails = DB::table('OrderHeader')
+            ->join('OrderDetail', 'OrderHeader.id', 'OrderDetail.order_id')
+            ->join('Product', 'OrderDetail.product_id', 'Product.id')
+            ->select('OrderDetail.no', 'Product.name as product_name', 'OrderDetail.qty', 'OrderDetail.order_id')
+            ->where('OrderHeader.id', $id)
+            ->get();
         $customers = DB::table('Customer')
             ->select('Customer.id', 'Customer.name')
             ->get();
-        return view('orderHeaders.edit', ['orderHeader' => $orderHeader, 'ref' => Util::getRef('/orderHeaders'), 'customers' => $customers]);
+        return view('orderHeaders.edit', ['orderHeader' => $orderHeader, 'ref' => Util::getRef('/orderHeaders'), 'orderHeaderOrderDetails' => $orderHeaderOrderDetails, 'customers' => $customers]);
     }
 
     public function update($id)

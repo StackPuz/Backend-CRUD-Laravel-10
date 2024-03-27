@@ -44,6 +44,7 @@
                             <td>{{$brand->name}}</td>
                             <td class="text-center">
                                 <a class="btn btn-sm btn-secondary" href="/brands/{{$brand->id}}" title="View"><i class="fa fa-eye"></i></a>
+                                <a class="btn btn-sm btn-primary" href="/brands/{{$brand->id}}/edit" title="Edit"><i class="fa fa-pencil"></i></a>
                                 <form action="/brands/{{$brand->id}}" method="POST">
                                     @method("DELETE")
                                     @csrf

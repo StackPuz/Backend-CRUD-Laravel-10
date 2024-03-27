@@ -47,6 +47,7 @@
                             <td class="text-center">{{$orderHeader->order_date}}</td>
                             <td class="text-center">
                                 <a class="btn btn-sm btn-secondary" href="/orderHeaders/{{$orderHeader->id}}" title="View"><i class="fa fa-eye"></i></a>
+                                <a class="btn btn-sm btn-primary" href="/orderHeaders/{{$orderHeader->id}}/edit" title="Edit"><i class="fa fa-pencil"></i></a>
                                 <form action="/orderHeaders/{{$orderHeader->id}}" method="POST">
                                     @method("DELETE")
                                     @csrf

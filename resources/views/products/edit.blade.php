@@ -33,7 +33,7 @@
                     </div>
                     <div class="form-group col-md-6 col-lg-4">
                         <label for="product_image">Image</label>
-                        <input type="file" id="product_image" name="image" class="form-control form-control-sm" maxlength="50" />
+                        <input type="file" accept="image/*" id="product_image" name="image" class="form-control form-control-sm" maxlength="50" />
                         <a href="/storage/products/{{old('image', $product->image)}}" target="_blank" title="{{old('image', $product->image)}}"><img class="img-item" src="/storage/products/{{old('image', $product->image)}}" /></a>
                         @error('image')<span class="text-danger">{{$message}}</span>@enderror
                     </div>

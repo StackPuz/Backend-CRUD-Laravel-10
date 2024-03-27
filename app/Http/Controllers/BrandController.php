@@ -59,7 +59,7 @@ class BrandController extends Controller {
             ->first();
         $brandProducts = DB::table('Brand')
             ->join('Product', 'Brand.id', 'Product.brand_id')
-            ->select('Product.name', 'Product.price', 'Product.id')
+            ->select('Product.name', 'Product.price')
             ->where('Brand.id', $id)
             ->get();
         return view('brands.show', ['brand' => $brand, 'ref' => Util::getRef('/brands'), 'brandProducts' => $brandProducts]);
@@ -71,7 +71,12 @@ class BrandController extends Controller {
             ->select('Brand.id', 'Brand.name')
             ->where('Brand.id', $id)
             ->first();
-        return view('brands.edit', ['brand' => $brand, 'ref' => Util::getRef('/brands')]);
+        $brandProducts = DB::table('Brand')
+            ->join('Product', 'Brand.id', 'Product.brand_id')
+            ->select('Product.name', 'Product.price', 'Product.id')
+            ->where('Brand.id', $id)
+            ->get();
+        return view('brands.edit', ['brand' => $brand, 'ref' => Util::getRef('/brands'), 'brandProducts' => $brandProducts]);
     }
 
     public function update($id)
